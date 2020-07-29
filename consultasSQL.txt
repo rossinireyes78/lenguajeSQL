@@ -1,0 +1,34 @@
+//consulta1
+SELECT count(*) FROM usairlineflights2.flights
+
+//consulta2
+select Origin, avg(ArrDelay) AS prom_llegada,avg(DepDelay) AS prom_salida
+FROM usairlineflights2.flights
+GROUP BY Origin
+order BY Origin ASC;
+
+//consulta3
+SELECT Origin,colYear,colMonth, AVG(ArrDelay) AS prom_llegada
+FROM usairlineflights2.flights
+GROUP BY Origin,colYear,colMonth
+order BY Origin,colYear,colMonth ASC
+
+
+//consulta5
+SELECT   UniqueCarrier, colYear,colMonth,SUM(cancelled) as vuelos_can FROM usairlineflights2.flights u
+   GROUP BY uniqueCarrier,colYear,colMonth
+   HAVING SUM(Cancelled)>=1
+ORDER BY  SUM(Cancelled) DESC, colYear DESC,colMonth DESC
+
+
+//consulta6
+SELECT TailNum, SUM(Distance) as total_distancia
+FROM usairlineflights2.flights
+where TailNum IS NOT NULL
+GROUP BY TailNum
+order by sum(Distance) DESC LIMIT 10
+
+//consulta7
+SELECT UniqueCarrier,AVG(ArrDelay) AS avg_delay FROM usairlineflights2.flights
+GROUP BY UniqueCarrier
+ORDER BY AVG(ArrDelay) DESC
